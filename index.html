@@ -6,7 +6,6 @@
   <title>Shopping List</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ===================== TOKENS ===================== */
     :root {
       --cream:      #F7F3EC;
       --cream-dark: #EDE7DA;
@@ -22,7 +21,6 @@
       --radius-sm:  7px;
     }
 
-    /* ===================== RESET ===================== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -34,7 +32,6 @@
       padding: 0 0 120px;
     }
 
-    /* ===================== HEADER ===================== */
     header {
       background: var(--ink);
       color: var(--cream);
@@ -53,22 +50,11 @@
       margin-bottom: 16px;
     }
 
-    header h1 span {
-      font-style: italic;
-      color: var(--accent);
-    }
+    header h1 span { font-style: italic; color: var(--accent); }
 
-    /* ===================== ADD FORM ===================== */
-    .add-form {
-      display: flex;
-      gap: 8px;
-      position: relative;
-    }
+    .add-form { display: flex; gap: 8px; position: relative; }
 
-    .input-wrap {
-      position: relative;
-      flex: 1;
-    }
+    .input-wrap { position: relative; flex: 1; }
 
     #itemInput {
       width: 100%;
@@ -86,7 +72,6 @@
     #itemInput::placeholder { color: rgba(247,243,236,0.4); }
     #itemInput:focus { border-color: var(--accent); }
 
-    /* Category suggestion pill */
     #catSuggest {
       display: none;
       position: absolute;
@@ -137,10 +122,8 @@
     .add-btn:active { transform: scale(0.97); }
     .add-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    /* ===================== CONTENT ===================== */
     main { padding: 24px 20px; max-width: 640px; margin: 0 auto; }
 
-    /* Status bar */
     .status-bar {
       display: flex;
       justify-content: space-between;
@@ -150,10 +133,8 @@
       font-size: 13px;
     }
 
-    .item-count { font-weight: 500; }
     .item-count strong { color: var(--accent); }
 
-    /* ===================== CATEGORY GROUPS ===================== */
     .category-group {
       margin-bottom: 20px;
       background: white;
@@ -196,7 +177,6 @@
       border-radius: 20px;
     }
 
-    /* ===================== ITEMS ===================== */
     .item-row {
       display: flex;
       align-items: center;
@@ -208,16 +188,9 @@
 
     .item-row:last-child { border-bottom: none; }
     .item-row:hover { background: #fafaf8; }
-
     .item-row.checked { background: #f9f9f7; }
 
-    /* Custom checkbox */
-    .check-wrap {
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
-      position: relative;
-    }
+    .check-wrap { width: 22px; height: 22px; flex-shrink: 0; position: relative; }
 
     .check-wrap input[type="checkbox"] {
       appearance: none;
@@ -275,7 +248,6 @@
     .item-row:hover .delete-btn { opacity: 1; }
     .delete-btn:hover { color: var(--accent); }
 
-    /* ===================== EMPTY STATE ===================== */
     .empty-state {
       text-align: center;
       padding: 60px 20px;
@@ -294,7 +266,6 @@
 
     .empty-state span { font-size: 13px; }
 
-    /* ===================== COMPLETE TRIP BUTTON ===================== */
     .complete-wrap {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -319,11 +290,7 @@
       display: none;
     }
 
-    .complete-btn:hover {
-      background: #2f6849;
-      box-shadow: 0 6px 24px rgba(58,125,90,0.45);
-    }
-
+    .complete-btn:hover { background: #2f6849; box-shadow: 0 6px 24px rgba(58,125,90,0.45); }
     .complete-btn:active { transform: scale(0.97); }
     .complete-btn.visible { display: block; animation: popUp 0.3s ease; }
 
@@ -331,20 +298,6 @@
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    /* ===================== LOADING / TOAST ===================== */
-    .spinner {
-      display: none;
-      width: 16px;
-      height: 16px;
-      border: 2px solid rgba(247,243,236,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.6s linear infinite;
-      margin: auto;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
 
     .toast {
       position: fixed;
@@ -360,14 +313,11 @@
       transition: all 0.3s;
       pointer-events: none;
       white-space: nowrap;
+      z-index: 999;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ===================== CONFIG OVERLAY ===================== */
     .config-btn {
       position: fixed;
       top: 16px;
@@ -462,10 +412,8 @@
 </head>
 <body>
 
-  <!-- Config button -->
   <button class="config-btn" onclick="openConfig()">⚙ Setup</button>
 
-  <!-- Header -->
   <header>
     <h1>Shopping <span>List</span></h1>
     <div class="add-form">
@@ -499,7 +447,6 @@
     </div>
   </header>
 
-  <!-- Main list -->
   <main>
     <div class="status-bar">
       <span class="item-count" id="itemCount">Loading...</span>
@@ -507,21 +454,18 @@
     <div id="listContainer"></div>
   </main>
 
-  <!-- Complete trip button -->
   <div class="complete-wrap">
     <button class="complete-btn" id="completeBtn" onclick="completeTrip()">
       ✓ Complete Shopping Trip
     </button>
   </div>
 
-  <!-- Toast -->
   <div class="toast" id="toast"></div>
 
-  <!-- Config overlay -->
   <div class="overlay" id="configOverlay">
     <div class="overlay-box">
       <h2>Script URL Setup</h2>
-      <p>Paste your Google Apps Script deployment URL below. You'll get this after deploying your Apps Script as a Web App.</p>
+      <p>Paste your Google Apps Script deployment URL below. Deploy as a Web App with access set to <strong>Anyone</strong>.</p>
       <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" />
       <div class="overlay-btns">
         <button class="btn-cancel" onclick="closeConfig()">Cancel</button>
@@ -532,21 +476,128 @@
 
 <script>
 // ===================== CONFIG =====================
-let SCRIPT_URL = localStorage.getItem("https://script.google.com/macros/s/AKfycbySsSTm8Be_IylmhZq9D67f6UyGY1SWHvgg7Z2moQIo9meoNl2bXMNF67Qv_28TalQM5Q/exec") || "";
+let SCRIPT_URL = localStorage.getItem("shoppingScriptUrl") || "";
 let detectedCategory = "";
+let cbCounter = 0; // unique JSONP callback counter
+
+// ===================== JSONP HELPER =====================
+// Bypasses CORS by injecting a <script> tag instead of using fetch
+function jsonp(params) {
+  return new Promise((resolve, reject) => {
+    const cbName = "__shoppingCb" + (++cbCounter);
+    const timeout = setTimeout(() => {
+      delete window[cbName];
+      reject(new Error("Request timed out"));
+    }, 15000);
+
+    window[cbName] = function(data) {
+      clearTimeout(timeout);
+      delete window[cbName];
+      const tag = document.getElementById(cbName);
+      if (tag) tag.remove();
+      resolve(data);
+    };
+
+    params.callback = cbName;
+
+    const qs = Object.entries(params)
+      .map(([k, v]) => encodeURIComponent(k) + "=" + encodeURIComponent(v))
+      .join("&");
+
+    const script = document.createElement("script");
+    script.id  = cbName;
+    script.src = SCRIPT_URL + "?" + qs;
+    script.onerror = () => {
+      clearTimeout(timeout);
+      delete window[cbName];
+      script.remove();
+      reject(new Error("Script load error — check your URL"));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+// ===================== API CALLS (all via JSONP) =====================
+async function apiCall(params) {
+  if (!SCRIPT_URL) {
+    showToast("⚠ Set your Script URL first (tap ⚙ Setup)");
+    return null;
+  }
+  try {
+    return await jsonp(params);
+  } catch (e) {
+    showToast("Error: " + e.message);
+    return null;
+  }
+}
+
+async function fetchItems() {
+  if (!SCRIPT_URL) {
+    renderList([]);
+    document.getElementById("itemCount").textContent = "Tap ⚙ Setup to get started";
+    return;
+  }
+  const data = await apiCall({ action: "getItems" });
+  if (data && data.success) renderList(data.items);
+}
+
+async function addItem() {
+  const input = document.getElementById("itemInput");
+  const name  = input.value.trim();
+  if (!name) return;
+
+  const category = resolveCategory();
+  const btn = document.getElementById("addBtn");
+  btn.disabled    = true;
+  btn.textContent = "Adding...";
+
+  const data = await apiCall({ action: "addItem", name, category });
+  if (data && data.success) {
+    input.value = "";
+    document.getElementById("catSuggest").style.display = "none";
+    document.getElementById("catSelect").value = "";
+    detectedCategory = "";
+    renderList(data.items);
+    showToast("Added to list");
+  }
+
+  btn.disabled    = false;
+  btn.textContent = "Add";
+  input.focus();
+}
+
+async function toggleCheck(row, checked) {
+  const data = await apiCall({ action: "updateChecked", row, checked });
+  if (data && data.success) renderList(data.items);
+}
+
+async function deleteItem(row) {
+  if (!confirm("Remove this item?")) return;
+  const data = await apiCall({ action: "deleteItem", row });
+  if (data && data.success) { renderList(data.items); showToast("Item removed"); }
+}
+
+async function completeTrip() {
+  const checkedCount = document.querySelectorAll(".item-row.checked").length;
+  if (checkedCount === 0) { showToast("Check off items first"); return; }
+  if (!confirm(`Clear ${checkedCount} checked item(s) and start fresh?`)) return;
+
+  const data = await apiCall({ action: "completeTrip" });
+  if (data && data.success) { renderList(data.items); showToast("🎉 Shopping trip complete!"); }
+}
 
 // ===================== CATEGORY DETECTION =====================
 const categoryMap = {
-  "Produce":        ["apple","apples","banana","bananas","orange","oranges","grape","grapes","strawberry","strawberries","blueberry","blueberries","lettuce","spinach","kale","arugula","broccoli","cauliflower","carrot","carrots","celery","cucumber","tomato","tomatoes","avocado","avocados","onion","onions","garlic","potato","potatoes","sweet potato","yam","zucchini","squash","pepper","peppers","mushroom","mushrooms","lemon","lemons","lime","limes","mango","peach","peaches","pear","pears","plum","plums","watermelon","melon","pineapple","corn","asparagus","green beans","snap peas","peas","beet","beets","radish","cabbage","brussels","ginger","herbs","basil","cilantro","parsley","mint","thyme","rosemary","chive","chives","scallion","scallions"],
+  "Produce":        ["apple","apples","banana","bananas","orange","oranges","grape","grapes","strawberry","strawberries","blueberry","blueberries","lettuce","spinach","kale","arugula","broccoli","cauliflower","carrot","carrots","celery","cucumber","tomato","tomatoes","avocado","avocados","onion","onions","garlic","potato","potatoes","sweet potato","yam","zucchini","squash","pepper","peppers","mushroom","mushrooms","lemon","lemons","lime","limes","mango","peach","peaches","pear","pears","plum","plums","watermelon","melon","pineapple","corn","asparagus","green beans","snap peas","peas","beet","beets","radish","cabbage","brussels","ginger","herbs","basil","cilantro","parsley","mint","thyme","rosemary","chives","scallion","scallions"],
   "Dairy":          ["milk","whole milk","skim milk","almond milk","oat milk","soy milk","cheese","cheddar","mozzarella","parmesan","brie","swiss","gouda","feta","cream cheese","cottage cheese","ricotta","butter","margarine","cream","heavy cream","sour cream","yogurt","greek yogurt","kefir","whipped cream","half and half","eggs","egg","ice cream"],
   "Meat & Seafood": ["chicken","beef","pork","turkey","lamb","veal","bacon","ham","sausage","salami","pepperoni","hot dog","hot dogs","bratwurst","steak","ground beef","ground turkey","ribs","roast","chops","filet","salmon","tuna","shrimp","cod","tilapia","halibut","crab","lobster","scallops","clams","oysters","anchovies","sardines","deli meat","lunchmeat","prosciutto"],
   "Bread & Bakery": ["bread","sourdough","baguette","roll","rolls","bagel","bagels","croissant","muffin","muffins","english muffin","pita","tortilla","tortillas","naan","wrap","wraps","bun","buns","hot dog bun","hamburger bun","toast","flatbread","cracker","crackers","cake","cupcake","donut","pastry","pie crust"],
   "Frozen":         ["frozen","ice cream","pizza","frozen pizza","frozen vegetables","frozen fruit","frozen meal","frozen burrito","waffles","waffle","pancakes","fries","tater tots","frozen yogurt","edamame","ice","popsicle","popsicles","gelato","sorbet"],
-  "Pantry":         ["rice","pasta","noodles","spaghetti","penne","flour","sugar","salt","pepper","oil","olive oil","vegetable oil","coconut oil","vinegar","sauce","tomato sauce","pasta sauce","ketchup","mustard","mayonnaise","mayo","relish","soy sauce","hot sauce","salsa","hummus","peanut butter","almond butter","jelly","jam","honey","maple syrup","syrup","canned","beans","black beans","chickpeas","lentils","soup","broth","stock","cereal","oats","oatmeal","granola","pancake mix","baking powder","baking soda","vanilla","spice","spices","seasoning","dressing","ranch","vinaigrette","chips","crackers","nuts","almonds","walnuts","cashews","seeds","chia","flax","quinoa","couscous","breadcrumbs","panko"],
-  "Snacks":         ["chips","popcorn","pretzels","crackers","granola bar","protein bar","candy","chocolate","gummy","cookies","oreos","trail mix","jerky","dried fruit","raisins","fruit snacks","rice cake","pork rinds"],
-  "Beverages":      ["water","sparkling water","soda","coke","pepsi","sprite","juice","orange juice","apple juice","coffee","espresso","tea","green tea","lemonade","sports drink","gatorade","energy drink","beer","wine","kombucha","coconut water","milk"],
-  "Household":      ["paper towel","paper towels","toilet paper","tissues","napkins","foil","aluminum foil","plastic wrap","ziploc","ziplock","trash bag","trash bags","dish soap","laundry detergent","detergent","bleach","cleaner","cleaning","sponge","mop","broom","vacuum","candle","batteries","lightbulb","light bulb","zip ties","tape","glue","bag","bags"],
-  "Personal Care":  ["shampoo","conditioner","soap","body wash","toothpaste","toothbrush","floss","mouthwash","deodorant","lotion","moisturizer","sunscreen","razor","shaving cream","cotton swab","cotton ball","bandaid","band-aid","ibuprofen","advil","tylenol","vitamin","vitamins","supplement","feminine","tampon","pad","makeup","lipstick","mascara","foundation","perfume","cologne"],
+  "Pantry":         ["rice","pasta","noodles","spaghetti","penne","flour","sugar","salt","pepper","oil","olive oil","vegetable oil","coconut oil","vinegar","sauce","tomato sauce","pasta sauce","ketchup","mustard","mayonnaise","mayo","relish","soy sauce","hot sauce","salsa","hummus","peanut butter","almond butter","jelly","jam","honey","maple syrup","syrup","canned","beans","black beans","chickpeas","lentils","soup","broth","stock","cereal","oats","oatmeal","granola","pancake mix","baking powder","baking soda","vanilla","spice","spices","seasoning","dressing","ranch","vinaigrette","nuts","almonds","walnuts","cashews","seeds","chia","flax","quinoa","couscous","breadcrumbs","panko"],
+  "Snacks":         ["chips","popcorn","pretzels","granola bar","protein bar","candy","chocolate","gummy","cookies","oreos","trail mix","jerky","dried fruit","raisins","fruit snacks","rice cake","pork rinds"],
+  "Beverages":      ["water","sparkling water","soda","coke","pepsi","sprite","juice","orange juice","apple juice","coffee","espresso","tea","green tea","lemonade","sports drink","gatorade","energy drink","beer","wine","kombucha","coconut water"],
+  "Household":      ["paper towel","paper towels","toilet paper","tissues","napkins","foil","aluminum foil","plastic wrap","ziploc","ziplock","trash bag","trash bags","dish soap","laundry detergent","detergent","bleach","cleaner","cleaning","sponge","mop","broom","candle","batteries","lightbulb","light bulb","tape","glue","bags"],
+  "Personal Care":  ["shampoo","conditioner","soap","body wash","toothpaste","toothbrush","floss","mouthwash","deodorant","lotion","moisturizer","sunscreen","razor","shaving cream","bandaid","band-aid","ibuprofen","advil","tylenol","vitamin","vitamins","supplement","tampon","pad","makeup","lipstick","mascara","foundation","perfume","cologne"],
   "Baby & Kids":    ["diapers","diaper","wipes","formula","baby food","pacifier","baby wash","baby shampoo","baby lotion"]
 };
 
@@ -568,15 +619,11 @@ const categoryIcons = {
 const categoryOrder = ["Produce","Dairy","Meat & Seafood","Bread & Bakery","Frozen","Pantry","Snacks","Beverages","Household","Personal Care","Baby & Kids","Other"];
 
 function detectCategory() {
-  const val = document.getElementById("itemInput").value.toLowerCase().trim();
+  const val     = document.getElementById("itemInput").value.toLowerCase().trim();
   const suggest = document.getElementById("catSuggest");
-  const catSelect = document.getElementById("catSelect");
+  const manual  = document.getElementById("catSelect").value;
 
-  if (!val || catSelect.value !== "") {
-    suggest.style.display = "none";
-    detectedCategory = "";
-    return;
-  }
+  if (!val || manual) { suggest.style.display = "none"; detectedCategory = ""; return; }
 
   detectedCategory = "";
   for (const [cat, keywords] of Object.entries(categoryMap)) {
@@ -596,98 +643,13 @@ function detectCategory() {
 
 function resolveCategory() {
   const manual = document.getElementById("catSelect").value;
-  if (manual) return manual;
-  return detectedCategory || "Other";
-}
-
-// ===================== API CALLS =====================
-async function apiCall(payload) {
-  if (!SCRIPT_URL) {
-    showToast("⚠ Set your Script URL first (tap ⚙ Setup)");
-    return null;
-  }
-  try {
-    const res = await fetch(SCRIPT_URL, {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-    return await res.json();
-  } catch (e) {
-    showToast("Connection error — check your Script URL");
-    return null;
-  }
-}
-
-async function fetchItems() {
-  if (!SCRIPT_URL) {
-    renderList([]);
-    document.getElementById("itemCount").textContent = "Configure your script URL to get started";
-    return;
-  }
-  try {
-    const res = await fetch(`${SCRIPT_URL}?action=getItems`);
-    const data = await res.json();
-    if (data.success) renderList(data.items);
-  } catch (e) {
-    showToast("Could not load list");
-  }
-}
-
-async function addItem() {
-  const input = document.getElementById("itemInput");
-  const name = input.value.trim();
-  if (!name) return;
-
-  const category = resolveCategory();
-  const btn = document.getElementById("addBtn");
-  btn.disabled = true;
-  btn.textContent = "Adding...";
-
-  const data = await apiCall({ action: "addItem", name, category });
-  if (data && data.success) {
-    input.value = "";
-    document.getElementById("catSuggest").style.display = "none";
-    document.getElementById("catSelect").value = "";
-    detectedCategory = "";
-    renderList(data.items);
-    showToast("Added to list");
-  }
-
-  btn.disabled = false;
-  btn.textContent = "Add";
-  input.focus();
-}
-
-async function toggleCheck(row, checked) {
-  const data = await apiCall({ action: "updateChecked", row, checked });
-  if (data && data.success) renderList(data.items);
-}
-
-async function deleteItem(row) {
-  if (!confirm("Remove this item?")) return;
-  const data = await apiCall({ action: "deleteItem", row });
-  if (data && data.success) {
-    renderList(data.items);
-    showToast("Item removed");
-  }
-}
-
-async function completeTrip() {
-  const checkedCount = document.querySelectorAll(".item-row.checked").length;
-  if (checkedCount === 0) { showToast("Check off items first"); return; }
-  if (!confirm(`Mark ${checkedCount} item(s) as done and clear them?`)) return;
-
-  const data = await apiCall({ action: "completeTrip" });
-  if (data && data.success) {
-    renderList(data.items);
-    showToast("🎉 Shopping trip complete!");
-  }
+  return manual || detectedCategory || "Other";
 }
 
 // ===================== RENDER =====================
 function renderList(items) {
-  const container = document.getElementById("listContainer");
-  const countEl   = document.getElementById("itemCount");
+  const container   = document.getElementById("listContainer");
+  const countEl     = document.getElementById("itemCount");
   const completeBtn = document.getElementById("completeBtn");
 
   if (!items || items.length === 0) {
@@ -702,7 +664,6 @@ function renderList(items) {
     return;
   }
 
-  // Group by category
   const groups = {};
   items.forEach(item => {
     const cat = item.category || "Other";
@@ -710,7 +671,6 @@ function renderList(items) {
     groups[cat].push(item);
   });
 
-  // Sort categories by defined order
   const sortedCats = categoryOrder.filter(c => groups[c])
     .concat(Object.keys(groups).filter(c => !categoryOrder.includes(c)));
 
@@ -718,7 +678,6 @@ function renderList(items) {
   sortedCats.forEach(cat => {
     const catItems = groups[cat];
     const icon = categoryIcons[cat] || "📦";
-    const allChecked = catItems.every(i => i.checked);
     html += `
       <div class="category-group">
         <div class="category-header">
@@ -728,7 +687,7 @@ function renderList(items) {
         </div>`;
     catItems.forEach(item => {
       html += `
-        <div class="item-row ${item.checked ? "checked" : ""}" id="row-${item.row}">
+        <div class="item-row ${item.checked ? "checked" : ""}">
           <div class="check-wrap">
             <input type="checkbox" ${item.checked ? "checked" : ""}
               onchange="toggleCheck(${item.row}, this.checked)" />
@@ -742,17 +701,12 @@ function renderList(items) {
 
   container.innerHTML = html;
 
-  const total    = items.length;
-  const checked  = items.filter(i => i.checked).length;
-  const unchecked = total - checked;
+  const total   = items.length;
+  const checked = items.filter(i => i.checked).length;
+  const remaining = total - checked;
 
-  countEl.innerHTML = `<strong>${unchecked}</strong> item${unchecked !== 1 ? "s" : ""} remaining${checked > 0 ? ` · ${checked} checked` : ""}`;
-
-  if (checked > 0) {
-    completeBtn.classList.add("visible");
-  } else {
-    completeBtn.classList.remove("visible");
-  }
+  countEl.innerHTML = `<strong>${remaining}</strong> item${remaining !== 1 ? "s" : ""} remaining${checked > 0 ? ` · ${checked} checked` : ""}`;
+  checked > 0 ? completeBtn.classList.add("visible") : completeBtn.classList.remove("visible");
 }
 
 function escapeHtml(str) {
@@ -788,9 +742,7 @@ function saveConfig() {
 }
 
 // ===================== INIT =====================
-if (!SCRIPT_URL) {
-  setTimeout(() => openConfig(), 600);
-}
+if (!SCRIPT_URL) { setTimeout(() => openConfig(), 600); }
 fetchItems();
 </script>
 </body>
